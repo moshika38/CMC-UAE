@@ -33,6 +33,8 @@ void main() async {
 
   if (!firebaseInitialized) {
     print('Warning: Firebase is not initialized. Some features may not work.');
+    print(
+        'Make sure GoogleService-Info.plist is properly added to the iOS project.');
   }
 
   runApp(const MyApp());
