@@ -50,19 +50,19 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyCJ3xRbmzslXd5S92t2TTYi8IgjMiI1yt8',
-    appId: '1:1030111489053:android:df65e38bca020ec9ae2af4',
-    messagingSenderId: '1030111489053',
-    projectId: 'uae---cmc',
-    storageBucket: 'uae---cmc.firebasestorage.app',
+    apiKey: 'AIzaSyDDXCx56seR31yyZ7my861qHL2LD3liVjs',
+    appId: '1:399426774282:android:16492b68d0f9d37acd06f3',
+    messagingSenderId: '399426774282',
+    projectId: 'meditation-center-uae',
+    storageBucket: 'meditation-center-uae.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyALhws0Skv14T-SSfwiyrcGEMrX-N9MxpY',
-    appId: '1:1030111489053:ios:462df693425b23e0ae2af4',
-    messagingSenderId: '1030111489053',
-    projectId: 'uae---cmc',
-    storageBucket: 'uae---cmc.firebasestorage.app',
+    apiKey: 'AIzaSyCNxszHjVNyUAFzu0qvUFoYAVNXzw0Dnek',
+    appId: '1:399426774282:ios:857cd97f3ed5ea48cd06f3',
+    messagingSenderId: '399426774282',
+    projectId: 'meditation-center-uae',
+    storageBucket: 'meditation-center-uae.firebasestorage.app',
     iosBundleId: 'com.example.ceylonMeditationCenter',
   );
 

@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "1030111489053",
-    "project_id": "uae---cmc",
-    "storage_bucket": "uae---cmc.firebasestorage.app"
+    "project_number": "399426774282",
+    "project_id": "meditation-center-uae",
+    "storage_bucket": "meditation-center-uae.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1030111489053:android:df65e38bca020ec9ae2af4",
+        "mobilesdk_app_id": "1:399426774282:android:16492b68d0f9d37acd06f3",
         "android_client_info": {
           "package_name": "com.example.ceylon_meditation_center"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyCJ3xRbmzslXd5S92t2TTYi8IgjMiI1yt8"
+          "current_key": "AIzaSyDDXCx56seR31yyZ7my861qHL2LD3liVjs"
         }
       ],
       "services": {
