@@ -1,6 +1,7 @@
 import 'package:ceylon_meditation_center/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,11 +29,11 @@ class CeylonMeditationCenterApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
-          seedColor: const Color(0xFF2E7D32), // Green color for meditation
+          seedColor: const Color(0xFF2E7D32),
           brightness: Brightness.light,
         ),
         useMaterial3: true,
-        fontFamily: 'Roboto',
+        scaffoldBackgroundColor: Colors.white,
       ),
       home: const HomePage(),
     );
@@ -58,7 +59,11 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _pages[_selectedIndex],
+      backgroundColor: Colors.white,
+      body: IndexedStack(
+        index: _selectedIndex,
+        children: _pages,
+      ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
         onTap: (index) {
@@ -66,8 +71,10 @@ class _HomePageState extends State<HomePage> {
             _selectedIndex = index;
           });
         },
-        selectedItemColor: Theme.of(context).colorScheme.primary,
+        selectedItemColor: const Color(0xFF2E7D32),
         unselectedItemColor: Colors.grey,
+        backgroundColor: Colors.white,
+        type: BottomNavigationBarType.fixed,
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
@@ -93,7 +100,7 @@ class MeditationHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF5F5F5),
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(16.0),
@@ -101,19 +108,21 @@ class MeditationHomePage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: 20),
-              Text(
+              const Text(
                 'Welcome to\nCeylon Meditation Center',
-                style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                      fontWeight: FontWeight.bold,
-                      color: const Color(0xFF2E7D32),
-                    ),
+                style: TextStyle(
+                  fontSize: 28,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFF2E7D32),
+                ),
               ),
               const SizedBox(height: 8),
               Text(
                 'Find your inner peace and tranquility',
-                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                      color: Colors.grey[600],
-                    ),
+                style: TextStyle(
+                  fontSize: 16,
+                  color: Colors.grey[600],
+                ),
               ),
               const SizedBox(height: 30),
 
@@ -122,14 +131,7 @@ class MeditationHomePage extends StatelessWidget {
                 width: double.infinity,
                 padding: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [
-                      const Color(0xFF2E7D32),
-                      const Color(0xFF4CAF50),
-                    ],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                  ),
+                  color: const Color(0xFF2E7D32),
                   borderRadius: BorderRadius.circular(16),
                 ),
                 child: Column(
@@ -160,7 +162,11 @@ class MeditationHomePage extends StatelessWidget {
                     const SizedBox(height: 16),
                     ElevatedButton(
                       onPressed: () {
-                        // TODO: Navigate to meditation session
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Starting meditation session...'),
+                          ),
+                        );
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.white,
@@ -182,11 +188,12 @@ class MeditationHomePage extends StatelessWidget {
               const SizedBox(height: 24),
 
               // Categories
-              Text(
+              const Text(
                 'Meditation Categories',
-                style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               const SizedBox(height: 16),
 
@@ -198,25 +205,21 @@ class MeditationHomePage extends StatelessWidget {
                 mainAxisSpacing: 16,
                 children: [
                   _buildCategoryCard(
-                    context,
                     'Mindfulness',
                     Icons.psychology,
                     const Color(0xFF4CAF50),
                   ),
                   _buildCategoryCard(
-                    context,
                     'Breathing',
                     Icons.air,
                     const Color(0xFF2196F3),
                   ),
                   _buildCategoryCard(
-                    context,
                     'Loving Kindness',
                     Icons.favorite,
                     const Color(0xFFE91E63),
                   ),
                   _buildCategoryCard(
-                    context,
                     'Body Scan',
                     Icons.accessibility,
                     const Color(0xFF9C27B0),
@@ -231,7 +234,6 @@ class MeditationHomePage extends StatelessWidget {
   }
 
   Widget _buildCategoryCard(
-    BuildContext context,
     String title,
     IconData icon,
     Color color,
@@ -241,14 +243,7 @@ class MeditationHomePage extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(12),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.1),
-            spreadRadius: 1,
-            blurRadius: 4,
-            offset: const Offset(0, 2),
-          ),
-        ],
+        border: Border.all(color: Colors.grey.shade300),
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -279,38 +274,35 @@ class SessionsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF5F5F5),
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: const Text('Meditation Sessions'),
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.white,
+        foregroundColor: const Color(0xFF2E7D32),
         elevation: 0,
       ),
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
           _buildSessionCard(
-            context,
             'Morning Mindfulness',
             '10 minutes',
             'Start your day with clarity and focus',
             Icons.wb_sunny,
           ),
           _buildSessionCard(
-            context,
             'Stress Relief',
             '15 minutes',
             'Release tension and find calm',
             Icons.spa,
           ),
           _buildSessionCard(
-            context,
             'Deep Breathing',
             '5 minutes',
             'Connect with your breath',
             Icons.air,
           ),
           _buildSessionCard(
-            context,
             'Loving Kindness',
             '20 minutes',
             'Cultivate compassion and love',
@@ -322,7 +314,6 @@ class SessionsPage extends StatelessWidget {
   }
 
   Widget _buildSessionCard(
-    BuildContext context,
     String title,
     String duration,
     String description,
@@ -334,14 +325,7 @@ class SessionsPage extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(12),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.1),
-            spreadRadius: 1,
-            blurRadius: 4,
-            offset: const Offset(0, 2),
-          ),
-        ],
+        border: Border.all(color: Colors.grey.shade300),
       ),
       child: Row(
         children: [
@@ -408,10 +392,11 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF5F5F5),
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: const Text('Profile'),
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.white,
+        foregroundColor: const Color(0xFF2E7D32),
         elevation: 0,
       ),
       body: SingleChildScrollView(
@@ -425,14 +410,7 @@ class ProfilePage extends StatelessWidget {
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(16),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.1),
-                    spreadRadius: 1,
-                    blurRadius: 4,
-                    offset: const Offset(0, 2),
-                  ),
-                ],
+                border: Border.all(color: Colors.grey.shade300),
               ),
               child: Column(
                 children: [
@@ -488,19 +466,16 @@ class ProfilePage extends StatelessWidget {
 
             // Menu Items
             _buildMenuItem(
-              context,
               'Settings',
               Icons.settings,
               () {},
             ),
             _buildMenuItem(
-              context,
               'Help & Support',
               Icons.help,
               () {},
             ),
             _buildMenuItem(
-              context,
               'About',
               Icons.info,
               () {},
@@ -517,14 +492,7 @@ class ProfilePage extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(12),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.1),
-            spreadRadius: 1,
-            blurRadius: 4,
-            offset: const Offset(0, 2),
-          ),
-        ],
+        border: Border.all(color: Colors.grey.shade300),
       ),
       child: Column(
         children: [
@@ -550,7 +518,6 @@ class ProfilePage extends StatelessWidget {
   }
 
   Widget _buildMenuItem(
-    BuildContext context,
     String title,
     IconData icon,
     VoidCallback onTap,
@@ -560,14 +527,7 @@ class ProfilePage extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(12),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.1),
-            spreadRadius: 1,
-            blurRadius: 4,
-            offset: const Offset(0, 2),
-          ),
-        ],
+        border: Border.all(color: Colors.grey.shade300),
       ),
       child: ListTile(
         leading: Icon(
