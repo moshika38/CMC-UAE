@@ -4,9 +4,37 @@ import 'package:flutter/material.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+
+  // Initialize Firebase with error handling
+  bool firebaseInitialized = false;
+
+  try {
+    print('Attempting to initialize Firebase...');
+
+    // First try with default options
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+    firebaseInitialized = true;
+    print('Firebase initialized successfully with default options');
+  } catch (e) {
+    print('Failed to initialize Firebase with default options: $e');
+
+    try {
+      // Try without options (will use GoogleService-Info.plist if available)
+      await Firebase.initializeApp();
+      firebaseInitialized = true;
+      print('Firebase initialized successfully without options');
+    } catch (e2) {
+      print('Failed to initialize Firebase without options: $e2');
+      print('Continuing without Firebase...');
+    }
+  }
+
+  if (!firebaseInitialized) {
+    print('Warning: Firebase is not initialized. Some features may not work.');
+  }
+
   runApp(const MyApp());
 }
 
