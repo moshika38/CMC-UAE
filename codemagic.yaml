@@ -26,10 +26,14 @@ workflows:
           else
             echo "Warning: GoogleService-Info.plist not found"
           fi
-      - name: Build for iOS Simulator
+      # - name: Build for iOS Simulator
+      #   script: |
+      #     flutter build ios --debug \
+      #       --no-codesign \
+      #       --simulator
+      - name: Build for iOS (Device)
         script: |
-          flutter build ios --debug \
-            --no-codesign \
-            --simulator
+          flutter build ios --release --no-codesign
+
     artifacts:
       - build/ios/iphonesimulator/*.app

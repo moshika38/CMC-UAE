@@ -12,7 +12,20 @@
           "package_name": "com.example.ceylon_meditation_center"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "399426774282-p78ch2hn3uier9k8i6ts1t77568qhk0q.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.ceylon_meditation_center",
+            "certificate_hash": "0a75696e5ab803a7be8dd18f8464c73b4fc3863f"
+          }
+        },
+        {
+          "client_id": "399426774282-hkv2uv0no1gmf4lrm1hiktpo9epqqf0l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyDDXCx56seR31yyZ7my861qHL2LD3liVjs"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "399426774282-hkv2uv0no1gmf4lrm1hiktpo9epqqf0l.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "399426774282-12dcp4pu4h9tuu0l5vrs6dode59dnhr5.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.ceylonMeditationCenter"
+              }
+            }
+          ]
         }
       }
     }
