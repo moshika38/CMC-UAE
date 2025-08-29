@@ -5,6 +5,7 @@
     <key>keychain-access-groups</key>
     <array>
         <string>$(AppIdentifierPrefix)com.example.ceylon_meditation_center</string>
+        <string>$(AppIdentifierPrefix)com.google.firebase.auth</string>
     </array>
 </dict>
 </plist>
