@@ -1,24 +1,39 @@
-scripts:
-    - name: Get Flutter packages
-      script: |
-        flutter pub get
-    - name: Ensure GoogleService-Info.plist is in project
-      script: |
-        cd ios
-        # Check if GoogleService-Info.plist exists
-        if [ -f "Runner/GoogleService-Info.plist" ]; then
-          echo "GoogleService-Info.plist found"
-          # Add to Xcode project if not already added
-          if ! grep -q "GoogleService-Info.plist" Runner.xcodeproj/project.pbxproj; then
-            echo "Adding GoogleService-Info.plist to Xcode project..."
-            # This is a simplified approach - in practice you might need to use Xcode or a tool
-            echo "Note: GoogleService-Info.plist should be manually added to Xcode project"
-          fi
-        else
-          echo "Warning: GoogleService-Info.plist not found"
-        fi
-    - name: Build for iOS Simulator
-      script: |
-        flutter build ios --debug \
-          --no-codesign \
-          --simulator
+workflows:
+  ios-simulator-workflow:
+    name: iOS Simulator Workflow
+    instance_type: mac_mini_m2
+    max_build_duration: 60
+    environment:
+      flutter: stable
+      xcode: latest
+      cocoapods: default
+    scripts:
+      - name: Get Flutter packages
+        script: |
+          flutter pub get
+      - name: Ensure GoogleService-Info.plist is in project
+        script: |
+          cd ios
+          # Check if GoogleService-Info.plist exists
+          if [ -f "Runner/GoogleService-Info.plist" ]; then
+            echo "GoogleService-Info.plist found"
+            # Add to Xcode project if not already added
+            if ! grep -q "GoogleService-Info.plist" Runner.xcodeproj/project.pbxproj; then
+              echo "Adding GoogleService-Info.plist to Xcode project..."
+              # This is a simplified approach - in practice you might need to use Xcode or a tool
+              echo "Note: GoogleService-Info.plist should be manually added to Xcode project"
+            fi
+          else
+            echo "Warning: GoogleService-Info.plist not found"
+          fi
+      - name: Build for iOS Simulator
+        script: |
+          flutter build ios --debug \
+            --no-codesign \
+            --simulator
+      # - name: Build for iOS (Device)
+      #   script: |
+      #     flutter build ios --release --no-codesign
+
+    artifacts:
+      - build/ios/iphonesimulator/*.app
